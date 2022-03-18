@@ -23,4 +23,4 @@ def post_create_view(request):
             return redirect('home')
     else:
         form = PostForm()
-    return render(request, 'pages/post_create.html')
+    return render(request, 'pages/post_create.html', {'form': form})

@@ -23,13 +23,15 @@
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                 <a class="nav-link" href="#">Blog</a>
-                <a class="nav-link" href="{% url 'post_create'%}">New Post</a>
+                <a class="nav-link" href="{% url 'post_create' %}">New Post</a>
             </div>
         </div>
         {% if user.is_authenticated %}
-            <div class="mx-2 text-white">Welcome {{ user.username }} | <a class="link-light text-decoration-none" href="{% url 'logout' %}">Log Out</a></div>
+            <div class="mx-2 text-white">Welcome {{ user.username }} | <a class="link-light text-decoration-none"
+                                                                          href="{% url 'logout' %}">Log Out</a></div>
         {% else %}
-            <div class="mx-2 text-white"><a class="link-light text-decoration-none" href="{% url 'login' %}">Log In</a> | <a class="link-light text-decoration-none" href="{% url 'signup' %}">Sign Up</a></div>
+            <div class="mx-2 text-white"><a class="link-light text-decoration-none" href="{% url 'login' %}">Log In</a>
+                | <a class="link-light text-decoration-none" href="{% url 'signup' %}">Sign Up</a></div>
         {% endif %}
     </div>
 </nav>
