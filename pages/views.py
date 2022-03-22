@@ -15,6 +15,11 @@ def post_detail_view(request, pk):
     return render(request, 'pages/post_detail.html', {'post': post})
 
 
+def myblog_post_view(request):
+    posts_list = Post.objects.filter(author=request.user.id).order_by('-datetime_modified')
+    return render(request, 'pages/my_blog.html', {'posts_list': posts_list})
+
+
 def post_create_view(request):
     if request.method == "POST":
         form = PostForm(request.POST)

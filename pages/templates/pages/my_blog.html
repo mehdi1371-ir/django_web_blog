@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+
+{% block page_title %}My Blog{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% for post in posts_list %}
+            <div class="card shadow-sm my-3">
+                <div class="card-body">
+                    <h5 class="card-body">{{ post.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted small py-2">By: {{ post.author }}</h6>
+                    <p class="card-text py-3">
+                        {{ post.text }}
+                    </p>
+                    <a href="{% url 'post_detail' post.id %}" class="btn btn-sm btn-danger btn=success">Read more</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="card shadow-sm my-3">
+            <div class="card-body">
+                <h5 class="card-body"><a href="{% url 'login' %}" >Log In</a> to see all of your posts</h5>
+
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
