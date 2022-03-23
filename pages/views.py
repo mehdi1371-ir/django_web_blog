@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 from .models import Post
 from .forms import PostForm
+from accounts.models import CustomUser
 
 
 def post_list_view(request):
@@ -32,13 +34,18 @@ def post_create_view(request):
 
 
 def post_update_view(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    if pk:
+        post = get_object_or_404(Post, pk=pk)
+        if post.author != request.user:
+            return render(request, 'pages/cant_update.html')
+        else:
+            post = Post(author=request.user)
     form = PostForm(request.POST or None, instance=post)
 
     if form.is_valid():
         form.save()
         return redirect('home')
-    return render(request, 'pages/post_create.html', {'form': form})
+    return render(request, 'pages/post_update.html', {'form': form})
 
 
 def post_delete_view(request, pk):
