@@ -34,12 +34,7 @@ def post_create_view(request):
 
 
 def post_update_view(request, pk):
-    if pk:
-        post = get_object_or_404(Post, pk=pk)
-        if post.author != request.user:
-            return render(request, 'pages/cant_update.html')
-        else:
-            post = Post(author=request.user)
+    post = get_object_or_404(Post, pk=pk)
     form = PostForm(request.POST or None, instance=post)
 
     if form.is_valid():
