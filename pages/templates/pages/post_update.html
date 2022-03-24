@@ -3,13 +3,9 @@
 {% block page_title %}Update Post{% endblock %}
 
 {% block content %}
-    {% if post.author == user %}
-        {% if user.id == post.author.id %}
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-info" type="submit">Submit</button>
-            </form>
-        {% endif %}
-    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-info" type="submit">Submit</button>
+    </form>
 {% endblock %}
